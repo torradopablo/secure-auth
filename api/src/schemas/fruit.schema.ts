@@ -1,6 +1,6 @@
 export const FruitSchema = 
   {
-    id: {
+    _id: {
       type: 'string',
       required: true,
     },

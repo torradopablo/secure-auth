@@ -17,9 +17,8 @@ app.listen(port, () => {
 });
 
 async function initial(){
-  let db = await MongoDB.getInstance();
-  let r = await FruitRepository.find();
-  console.log(r);
+  await MongoDB.getInstance();
+  console.log(await (await FruitRepository.getInstance()).find());
 
 }
 

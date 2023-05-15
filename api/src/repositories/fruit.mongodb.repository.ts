@@ -1,46 +1,48 @@
 import MongoDB from '../datasources/mongodb.datasource';
+//import {RepositoryI} from '../interfaces/repository';
 const FruitSchema = require( '../schemas/fruit.schema');
-import { Model, Document, Schema } from 'mongoose';
+
 
   interface IFruit extends Document {
-    id: string;
+    _id: string;
     name: string;
     pricePerKilo: string;
   }
-  
-  
-  class Repository<T extends Document> {
-    private model:Model<T>;
 
-    constructor(schema: Schema<T>, collectionName:string)  {
+  class FruitRepository {
+    private static instance: FruitRepository;
+    private model:any;
 
+    constructor() {}
+
+    public static async getInstance(): Promise<FruitRepository> {
+      if (!FruitRepository.instance) {
+        FruitRepository.instance = new FruitRepository();
+        await FruitRepository.instance.initial();
+      }
+      return FruitRepository.instance;
+    }
+
+    private async initial(): Promise<void> {
       MongoDB.getInstance().then((db)=>{
         const connection = db.getConnection();
-        this.model = connection.model<T>(collectionName, schema);//console.log(this.model);
+        this.model = connection.model('Fruit', FruitSchema.FruitSchema);
       });
     }
 
-    public async save(data: Partial<T>): Promise<T> {
+    public async save(data:IFruit): Promise<IFruit> {
       const document = new this.model(data);
       return document.save();
     }
 
-    public async find(): Promise<T[]> {
+    public async find(): Promise<IFruit> {
       try{
-        console.log( this.model)
         const documents = await this.model.find({});
         return documents;
       } catch (error) {
         throw new Error(`${error}`);
       }
-   
     }
   }
 
-  var FruitRepository =  new Repository<IFruit>(new Schema(FruitSchema.FruitSchema),'Fruit');
-  
-
   export default FruitRepository;
-
-
-

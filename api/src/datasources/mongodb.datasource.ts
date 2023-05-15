@@ -28,10 +28,7 @@ class MongoDB {
   public getConnection():Connection{
     return this.connection;
   }
-/*
-  public getModel<T extends Document>(name: string, schema: Schema<T>): Model<T> {
-    return this.connection.model<T>(name, schema);
-  }*/
+
 }
 
 export default MongoDB;
