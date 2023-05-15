@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import MongoDB from './datasources/mongodb.datasource';
+import FruitRepository from './repositories/fruit.mongodb.repository';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.listen(port, () => {
 
 async function initial(){
   await MongoDB.getInstance();
+//  await FruitRepository.find();
 
 }
 

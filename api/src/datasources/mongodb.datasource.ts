@@ -1,23 +1,40 @@
-import mongoose from 'mongoose';
+
+import mongoose, { Connection } from 'mongoose';
+
 
 class MongoDB {
 
-    private static _instance: MongoDB;
-
-    private constructor()  {
-        mongoose.connect(process.env.DB_URL??'')
-        .then(() => console.log('⚡️[DB] MongoDB connection established successfully'))
-        .catch((e: mongoose.Error) => console.log(`⚡️[DB] MongoDB connection failed with error: ${e}`));
+    private static instance: MongoDB;
+    private connection: Connection;
+    
+    private constructor() {
+        mongoose.connect(process.env.DB_URL??'');
+    
+        this.connection = mongoose.connection;
+    
+        this.connection.on('connected', () => {
+            console.log('⚡️[DB] MongoDB connection established successfully');
+        });
+    
+        this.connection.on('error', (err) => {
+            console.error(`⚡️[DB] MongoDB connection failed with error: ${err}`);
+        });
     }
-
-    static async getInstance() {
-        if (this._instance) {
-            return this._instance;
+    
+    public static getInstance(): MongoDB {
+        if (!MongoDB.instance) {
+            MongoDB.instance = new MongoDB();
         }
-
-        this._instance = new MongoDB();
-        return this._instance;
+        return MongoDB.instance;
     }
+    
+    public getConnection(): Connection {
+        return this.connection;
+    }    
 }
 
 export default MongoDB;
+
+
+
+
