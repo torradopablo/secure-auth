@@ -1,24 +1,16 @@
-const FruitShcema = {
-    "Fruit":{
-      "$id":"Fruit",
-      "title": "Fruit",
-      "type": "object",
-      "properties": {
-        "_id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "pricePerKio": {
-          "type": "string"
-        },
-      },
-      "required": [
-        "_id",
-        "name",
-        "pricePerKio"
-      ],
+export const FruitSchema = 
+  {
+    id: {
+      type: 'string',
+      required: true,
     },
-}
-exports.default = FruitShcema;
+    name: {
+      type: 'string',
+      required: true,
+    },
+    pricePerKilo: {
+      type: 'string',
+      required: true,
+    },
+  
+};

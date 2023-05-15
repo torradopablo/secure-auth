@@ -1,40 +1,37 @@
-
 import mongoose, { Connection } from 'mongoose';
 
-
 class MongoDB {
+  private static instance: MongoDB;
+  private connection: Connection;
 
-    private static instance: MongoDB;
-    private connection: Connection;
-    
-    private constructor() {
-        mongoose.connect(process.env.DB_URL??'');
-    
-        this.connection = mongoose.connection;
-    
-        this.connection.on('connected', () => {
-            console.log('⚡️[DB] MongoDB connection established successfully');
-        });
-    
-        this.connection.on('error', (err) => {
-            console.error(`⚡️[DB] MongoDB connection failed with error: ${err}`);
-        });
+  private constructor() {
+    this.connection = mongoose.connection;
+  }
+
+  public static async getInstance(): Promise<MongoDB> {
+    if (!MongoDB.instance) {
+        MongoDB.instance = new MongoDB();
+      await MongoDB.instance.connect();
     }
-    
-    public static getInstance(): MongoDB {
-        if (!MongoDB.instance) {
-            MongoDB.instance = new MongoDB();
-        }
-        return MongoDB.instance;
+    return MongoDB.instance;
+  }
+
+  private async connect(): Promise<void> {
+    try {
+      await mongoose.connect(process.env.DB_URL??'');
+      console.log('⚡️[DB] MongoDB connection established successfully');
+    } catch (error) {
+      console.log(`⚡️[DB] MongoDB connection failed with error: ${error}`);
     }
-    
-    public getConnection(): Connection {
-        return this.connection;
-    }    
+  }
+
+  public getConnection():Connection{
+    return this.connection;
+  }
+/*
+  public getModel<T extends Document>(name: string, schema: Schema<T>): Model<T> {
+    return this.connection.model<T>(name, schema);
+  }*/
 }
 
 export default MongoDB;
-
-
-
-
