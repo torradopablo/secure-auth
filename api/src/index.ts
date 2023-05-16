@@ -1,26 +1,21 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import MongoDB from './datasources/mongodb.datasource';
-import FruitRepository from './repositories/fruit.mongodb.repository';
-
+//import FruitRepository from './repositories/fruit.mongodb.repository';
+import Api from './api';
+import {FruitRoute} from './routes/fruit.route';
 dotenv.config();
-
-const app: Express = express();
-const port = process.env.PORT;
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
-
-app.listen(port, () => {
-  console.log(`⚡️[API]: Server is running at http://localhost:${port}`);
-});
 
 async function initial(){
   await MongoDB.getInstance();
-  console.log(await (await FruitRepository.getInstance()).find());
-
+  await Api.getInstance();
+  await FruitRoute();
 }
 
 initial();
+
+
+
+
+
 

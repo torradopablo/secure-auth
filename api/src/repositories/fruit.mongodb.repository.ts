@@ -3,7 +3,7 @@ import MongoDB from '../datasources/mongodb.datasource';
 const FruitSchema = require( '../schemas/fruit.schema');
 
 
-  interface IFruit extends Document {
+  export interface IFruit extends Document {
     _id: string;
     name: string;
     pricePerKilo: string;
@@ -28,21 +28,42 @@ const FruitSchema = require( '../schemas/fruit.schema');
         const connection = db.getConnection();
         this.model = connection.model('Fruit', FruitSchema.FruitSchema);
       });
-    }
+    };
 
     public async save(data:IFruit): Promise<IFruit> {
-      const document = new this.model(data);
-      return document.save();
-    }
+      try {console.log(data)
+        const document = new this.model(data);
+        return document.save();
+      } catch(error) {
+        throw new Error(`${error}`);
+      }
+    };
 
-    public async find(): Promise<IFruit> {
+    public async find(query:object): Promise<IFruit> {
       try{
-        const documents = await this.model.find({});
+        const documents = await this.model.find(query);
         return documents;
       } catch (error) {
         throw new Error(`${error}`);
       }
+    };
+
+    public async delete(_id:string) : Promise<void> {
+      try {
+        return await this.model.deleteOne({_id:_id});
+      } catch(error) {
+        throw new Error(`${error}`);
+      }
+    };
+
+    public async update(_id:string,update:Partial<IFruit>) : Promise<void> {
+      try {
+        return await this.model.updateOne({_id:_id},update);
+      } catch(error) {
+        throw new Error(`${error}`);
+      }
     }
+
   }
 
   export default FruitRepository;
