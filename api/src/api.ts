@@ -22,7 +22,7 @@ class Api {
   private async connect(): Promise<void> {
     try {
         const port = process.env.PORT;
-        this.app.listen(port, () => {
+        this.app.listen(port || 4001, () => {
           console.log(`⚡️[API]: Server is running at http://localhost:${port}`);
         });
     } catch (error) {

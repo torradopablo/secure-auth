@@ -10,5 +10,4 @@
       "types": ["node"],
     },
     "include": ["src/**/*"],
-
   }
