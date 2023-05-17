@@ -54,18 +54,18 @@ const { url } = await startStandaloneServer(server, {
 console.log(`🚀 Apollo server ready at: ${url}`);
 
 
-
+var userData:any;
 
 passport.use(new PassportGithub.Strategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
   callbackURL: "http://localhost:3100/auth/github/callback"
 },
-function(accessToken:any, refreshToken, profile, done) {
+async function(accessToken:any, refreshToken, profile, done) {
     
     try{
       console.log(profile)
-      return done(null,profile)
+      return done(null,profile.id)
     } catch (error) {
       return done(error,false)
     }
@@ -73,6 +73,23 @@ function(accessToken:any, refreshToken, profile, done) {
 }
 ));
 
+
+passport.serializeUser((user:any,done)=> {
+  console.log('Serializing User')
+  console.log(user);
+  userData=user;
+   done(null,user.id);
+});
+
+passport.deserializeUser((id,done)=>{
+  console.log('Deserialize User User')
+  console.log(id)
+  try {
+     done(null,userData.id)
+  }  catch(error) {
+     done(error,null)
+  }
+})
 
 const app = express()
 const port = process.env.API_PORT
