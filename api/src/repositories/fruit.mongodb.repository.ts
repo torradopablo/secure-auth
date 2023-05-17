@@ -31,7 +31,7 @@ const FruitSchema = require( '../schemas/fruit.schema');
     };
 
     public async save(data:IFruit): Promise<IFruit> {
-      try {console.log(data)
+      try {
         const document = new this.model(data);
         return document.save();
       } catch(error) {
