@@ -1,28 +1,27 @@
-import { gql } from '@apollo/client';
-import client from '@/apollo-client/apollo.client';
+import React from "react"
+import { gql, useQuery } from "@apollo/client";
 
   
-export default /*async*/ function Home() {
-/*
-    const GET_FRUITS = gql`
-    {
-        query getFruits {
-            getFruits {
-                _id
-                name
-                pricePerKilo
-            }
+const GET_FRUITS = gql`
+    query{
+        getFruits {
+            _id
+            name
+            pricePerKilo
         }
     }
-    `;
-    const { data } = await client.query({query:GET_FRUITS});
-    console.log(data)
+`
 
-    return {
-        props: {
-            getFruits: data.toString(),
-        },
-     };
-*/
-     return <div>HOME</div>
+
+export default function Home() {
+    const { data, loading, error} = useQuery(GET_FRUITS,{
+        onCompleted: data =>{
+            console.log(data.getFruits)
+        }
+    })
+    return (
+     <div>
+        HOME
+     </div>
+     )
 }
