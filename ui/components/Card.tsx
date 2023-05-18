@@ -5,16 +5,16 @@ import { MdEdit } from "react-icons/md";
 type Props = any
 
 
-export default function Card({infoCard}: Props) {
+export default function Card({infoCard, deleteItem}: Props) {
   return (
-    <div className='bg-zinc-600 w-72  md:w-[40rem]  p-5 mt-4 flex flex-col items-center justify-center  space-y-11 rounded-lg '>
+    <div className='bg-zinc-600 w-72  md:w-[40rem] p-5 mt-9  flex flex-col items-center justify-center  space-y-11 rounded-lg '>
     
     <div className='h-[1%] items-center justify-between  flex flex-row  w-full '> 
         <div>
             {React.createElement(MdEdit)}
 
         </div>
-        <div>
+        <div onClick={()=>deleteItem(infoCard._id)}>
             {React.createElement(BsTrash)}
         </div>
     </div>
