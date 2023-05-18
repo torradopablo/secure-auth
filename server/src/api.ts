@@ -72,7 +72,7 @@ app.get('/auth/github/callback',
     res.redirect(`${process.env.HOME_UI}`);
   });
 
-app.get('/failure', (req,res)=> res.send('Your auth is not good'))  
+app.get('/failure', (req,res)=> res.send('Incorrect credentials'))  
 
 
 app.listen(port || 3100, () => {
