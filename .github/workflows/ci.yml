@@ -18,6 +18,8 @@ jobs:
     - name: api
       uses: docker/build-push-action@v1
       with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: ./dockerfiles/dockerfile-api
           repository: torradopablo1/secure-auth-api
           tags: 1.0.0
@@ -25,6 +27,8 @@ jobs:
     - name: server
       uses: docker/build-push-action@v1
       with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: ./dockerfiles/dockerfile-server
           repository: torradopablo1/secure-auth-server
           tags: 1.0.0
@@ -32,6 +36,8 @@ jobs:
     - name: ui
       uses: docker/build-push-action@v1
       with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
           dockerfile: ./dockerfiles/dockerfile-ui
           repository: torradopablo1/secure-auth-ui
           tags: 1.0.0
