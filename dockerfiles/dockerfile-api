@@ -1,0 +1,7 @@
+FROM node:latest
+WORKDIR /usr/src/app
+COPY $PWD/api/package*.json ./
+EXPOSE 4001
+RUN npm install
+COPY $PWD/api/src ./src
+CMD [ "npm", "start" ]

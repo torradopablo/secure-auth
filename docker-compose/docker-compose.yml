@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+
+  api:
+    container_name: api
+    image: torradopablo1/secure-auth-api:1.0.0
+    restart: always
+    ports:
+      - '4001:4001'
+    env_file:
+      - ./env/.api
+
+  server:
+    container_name: server
+    image: torradopablo1/secure-auth-server:1.0.0
+    restart: always
+    ports:
+      - '3100:3100'
+      - '4000:4000'
+    env_file:
+      - ./env/.server
+
+  ui:
+    container_name: ui
+    image: torradopablo1/secure-auth-ui:1.0.0
+    restart: always
+    ports:
+      - '3000:3000'
+    env_file:
+      - ./env/.ui

@@ -1,0 +1,37 @@
+
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: api
+      uses: docker/build-push-action@v1
+      with:
+          dockerfile: ./dockerfiles/dockerfile-api
+          repository: torradopablo1/secure-auth-api
+          tags: 1.0.0
+
+    - name: server
+      uses: docker/build-push-action@v1
+      with:
+          dockerfile: ./dockerfiles/dockerfile-server
+          repository: torradopablo1/secure-auth-server
+          tags: 1.0.0
+
+    - name: ui
+      uses: docker/build-push-action@v1
+      with:
+          dockerfile: ./dockerfiles/dockerfile-ui
+          repository: torradopablo1/secure-auth-ui
+          tags: 1.0.0

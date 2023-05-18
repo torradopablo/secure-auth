@@ -1,0 +1,8 @@
+FROM node:latest
+WORKDIR /usr/src/app
+COPY $PWD/server/package*.json ./
+EXPOSE 4000
+EXPOSE 3100
+RUN npm install
+COPY $PWD/server/src ./src
+CMD [ "npm", "start" ]
