@@ -33,14 +33,15 @@ const { url } = await startStandaloneServer(server, {
   listen: { port: eval(process.env.PORT) || 4000 },
   context: async ({ req, res }) => {
     const token = req.headers.authorization || '';
-    const user = await getUser(token.replace('Bearer', ''));
-    if (!user)
+    const user = await getUser(token.replace('Bearer ', ''));
+    if (!user){
       throw new GraphQLError('User is not authenticated', {
         extensions: {
           code: 'UNAUTHENTICATED',
           http: { status: 401 },
         },
       });
+    }
     return { user };
   },
 });

@@ -15,7 +15,7 @@ const jwtSecret = process.env.JWT_SECRET
 passport.use(new PassportGithub.Strategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://localhost:3100/auth/github/callback"
+  callbackURL: `http://localhost:${process.env.API_PORT}/auth/github/callback`
 },
 async function(accessToken:any, refreshToken, profile, done) {    
     try{
