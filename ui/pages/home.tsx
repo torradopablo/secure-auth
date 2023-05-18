@@ -1,41 +1,28 @@
-import { ApolloClient, InMemoryCache, ApolloProvider, useQuery, gql, useLazyQuery  } from '@apollo/client';
-import { getCookie } from 'cookies-next';
-import React, { useState } from 'react';
-
-
-const clientApollo = new ApolloClient({
-  uri: `${process.env.NEXT_PUBLIC_APOLLO_SERVER_URL}`,
-  cache: new InMemoryCache(),
-  headers: {authorization: `Bearer ${getCookie('access_token')}`}
-});
-
+import { gql } from '@apollo/client';
+import client from '@/apollo-client/apollo.client';
 
   
-export default function Home() {
-
-    const GET_FRUITS = gql`
-  {
-    getFruits {
-      
-      name
-      pricePerKilo
-    }
-  }
-`;
-
+export default /*async*/ function Home() {
 /*
-    const getFruits = async () =>{
-        const [data,result] =  useLazyQuery(GET_FRUITS);
-        setFruits(data);
-    };
+    const GET_FRUITS = gql`
+    {
+        query getFruits {
+            getFruits {
+                _id
+                name
+                pricePerKilo
+            }
+        }
+    }
+    `;
+    const { data } = await client.query({query:GET_FRUITS});
+    console.log(data)
 
-    const [Fruits, setFruits] = useState([])
-*/    
-
-  return (
-    <div>
-        HOME
-        { }
-    </div>
-  )
+    return {
+        props: {
+            getFruits: data.toString(),
+        },
+     };
+*/
+     return <div>HOME</div>
 }
