@@ -1,6 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import typeDefs from './graphql/typeDefs';
+import typeDefs from './graphql/typedefs';
 import resolvers from './graphql/resolvers';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
