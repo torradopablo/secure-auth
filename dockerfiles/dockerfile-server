@@ -1,0 +1,8 @@
+FROM node:latest
+WORKDIR /usr/src/app
+COPY $PWD/server .
+RUN npm install
+RUN npm install typescript -g
+EXPOSE 4000
+EXPOSE 3100
+CMD [ "npm", "start" ]
