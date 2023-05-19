@@ -64,6 +64,7 @@ NEXT_PUBLIC_APOLLO_SERVER_URL=http://localhost:4000
 Run the following command.
 
 ```shell
+cd docker-compose
 sudo docker compose up -d
 ```
 

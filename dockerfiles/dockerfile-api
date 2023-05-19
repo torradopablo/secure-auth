@@ -2,7 +2,7 @@ FROM node:latest
 WORKDIR /usr/src/app
 COPY $PWD/api .
 RUN npm install typescript -g
+RUN npm install tsc -g
 RUN npm install
-RUN tsc
 EXPOSE 4001
 CMD [ "npm", "run", "dev" ]
