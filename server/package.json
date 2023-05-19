@@ -39,7 +39,7 @@
     "@types/cors": "^2.8.13",
     "@types/express-session": "^1.17.7",
     "@types/jsonwebtoken": "^9.0.2",
-    "@types/node": "^20.1.7",
+    "@types/node": "^20.2.1",
     "@types/passport": "^1.0.12",
     "@types/passport-github2": "^1.2.5",
     "typescript": "^5.0.4"

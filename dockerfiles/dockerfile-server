@@ -3,6 +3,7 @@ WORKDIR /usr/src/app
 COPY $PWD/server .
 RUN npm install
 RUN npm install typescript -g
+RUN npm i -D @types/node
 EXPOSE 4000
 EXPOSE 3100
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev" ]
