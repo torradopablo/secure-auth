@@ -1,8 +1,9 @@
 FROM node:latest
 WORKDIR /usr/src/app
-COPY $PWD/server/package*.json ./
+COPY $PWD/server .
+RUN npm install typescript -g
+RUN npm install
+RUN tsc
 EXPOSE 4000
 EXPOSE 3100
-RUN npm install
-COPY $PWD/server/src ./src
 CMD [ "npm", "start" ]

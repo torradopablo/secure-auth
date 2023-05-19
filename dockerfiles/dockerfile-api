@@ -1,7 +1,8 @@
 FROM node:latest
 WORKDIR /usr/src/app
-COPY $PWD/api/package*.json ./
-EXPOSE 4001
+COPY $PWD/api .
+RUN npm install typescript -g
 RUN npm install
-COPY $PWD/api/src ./src
+RUN tsc
+EXPOSE 4001
 CMD [ "npm", "start" ]
