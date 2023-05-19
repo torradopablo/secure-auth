@@ -1,13 +1,19 @@
-# Secure-Auth
+# Fruit Merkat
 Fruit Merkat is simple porject with CRUD fruit items functions for fruit Merkat to track the price of each one through a Web App. This project combines a REST API, an Apollo GraphQL server, and a UI client, all working together to provide a secure authentication solution. The server-side implements GitHub authentication for clients, allowing users to authenticate using their GitHub accounts.
 
 ## Features
 Secure authentication with GitHub
+
 RESTful API for data exchange
+
 Apollo GraphQL server for efficient data querying
+
 UI client powered by Apollo client
+
 Deployable with Docker Compose
+
 Prerequisites
+
 
 Before running the project, make sure you have the following software installed:
 

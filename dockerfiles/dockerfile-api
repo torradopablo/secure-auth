@@ -5,4 +5,4 @@ RUN npm install typescript -g
 RUN npm install
 RUN tsc
 EXPOSE 4001
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev" ]
