@@ -1,5 +1,5 @@
-# Fruit Merkat
-Fruit Merkat is simple porject with CRUD fruit items functions for fruit Merkat to track the price of each one through a Web App. This project combines a REST API, an Apollo GraphQL server, and a UI client, all working together to provide a secure authentication solution. The server-side implements GitHub authentication for clients, allowing users to authenticate using their GitHub accounts.
+# Fruit Market
+Fruit Market is simple porject with CRUD fruit items functions for fruit Merkat to track the price of each one through a Web App. This project combines a REST API, an Apollo GraphQL server, and a UI client, all working together to provide a secure authentication solution. The server-side implements GitHub authentication for clients, allowing users to authenticate using their GitHub accounts.
 
 ## Features
 Secure authentication with GitHub

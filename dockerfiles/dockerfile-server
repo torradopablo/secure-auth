@@ -4,6 +4,7 @@ COPY $PWD/server .
 RUN npm install
 RUN npm install typescript -g
 RUN npm i -D @types/node
+RUN npx tsc
 EXPOSE 4000
 EXPOSE 3100
 CMD [ "npm", "run", "dev" ]
